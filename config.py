@@ -1,5 +1,7 @@
 from os.path import dirname, abspath
 import calendar
+from sigm import dev_check
+
 
 class Config:
     PARENT_DIR = dirname(abspath(__file__))
@@ -25,35 +27,21 @@ class Config:
         }
     ]
 
-    TASK_SCHEDULE = [
-        {
-            'name': 'monday afternoon',
-            'weekday': calendar.MONDAY,
-            'hour': 17,
-            'minute': 0
-        },
-        {
-            'name': 'tuesday afternoon',
-            'weekday': calendar.TUESDAY,
-            'hour': 17,
-            'minute': 0
-        },
-        {
-            'name': 'wednesday afternoon',
-            'weekday': calendar.WEDNESDAY,
-            'hour': 15,
-            'minute': 0
-        },
-        {
-            'name': 'thursday afternoon',
-            'weekday': calendar.THURSDAY,
-            'hour': 15,
-            'minute': 0
-        },
-        {
-            'name': 'friday afternoon',
-            'weekday': calendar.FRIDAY,
-            'hour': 17,
-            'minute': 0
-        }
-    ]
+    if not dev_check():
+        TASK_SCHEDULE = [
+            {
+                'name': 'friday afternoon',
+                'weekday': calendar.FRIDAY,
+                'hour': 17,
+                'minute': 0
+            }
+        ]
+    else:
+        TASK_SCHEDULE = [
+            {
+                'name': 'friday afternoon',
+                'weekday': calendar.MONDAY,
+                'hour': 11,
+                'minute': 8
+            }
+        ]

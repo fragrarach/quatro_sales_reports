@@ -2,14 +2,13 @@ import smtplib
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from email.mime.application import MIMEApplication
+from sigm import dev_check
 
 
 def send_email(email_body, salesman, attachments=None, subject=None):
     from_str = 'noreply@quatroair.com'
-    # to_list = [salesman['email']]
-    to_list = ['jan.z@quatroair.com']
-    # cc_list = ['sanjay.m@quatroair.com']
-    cc_list = ['jan.z@quatroair.com']
+    to_list = [salesman['email']] if not dev_check() else ['jan.z@quatroair.com']
+    cc_list = ['sanjay.m@quatroair.com'] if not dev_check() else ['jan.z@quatroair.com']
     bcc_list = ['jan.z@quatroair.com']
 
     to_str = ', '.join(to_list)

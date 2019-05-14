@@ -1,5 +1,4 @@
 import datetime
-import calendar
 from threading import Timer
 from config import Config
 from files import run_ninja, delete_pdfs
@@ -47,8 +46,11 @@ def schedule_handler(now):
                 return minute, hour, day, month, year
 
     if 'weekday' in Config.TASK_SCHEDULE[0].keys():
-        while then.weekday() != Config.TASK_SCHEDULE[0]['weekday']:
-            then += datetime.timedelta(days=1)
+        if Config.TASK_SCHEDULE[0]['weekday'] == now.weekday():
+            then += datetime.timedelta(weeks=1)
+        else:
+            while then.weekday() != Config.TASK_SCHEDULE[0]['weekday']:
+                then += datetime.timedelta(days=1)
     else:
         then = now + datetime.timedelta(days=1)
 
