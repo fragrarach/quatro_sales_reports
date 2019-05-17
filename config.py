@@ -40,8 +40,8 @@ class Config:
         TASK_SCHEDULE = [
             {
                 'name': 'friday afternoon',
-                'weekday': calendar.MONDAY,
-                'hour': 11,
-                'minute': 8
+                'weekday': calendar.FRIDAY,
+                'hour': 14,
+                'minute': 32
             }
         ]
