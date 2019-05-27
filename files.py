@@ -1,19 +1,14 @@
 import os
-import datetime
 from subprocess import check_output
-from config import Config
 
 
-def run_ninja(salesman):
-    ninja = Config.PARENT_DIR + '\\CrystalReportsNinja.exe'
-    report = Config.PARENT_DIR + '\\files\\crystal reports\\Sales Order Summary.rpt'
+def run_ninja(config, start_date, end_date, salesman):
+    ninja = config.PARENT_DIR + '\\CrystalReportsNinja.exe'
+    report = config.PARENT_DIR + '\\files\\crystal reports\\Sales Order Summary.rpt'
 
-    end_date = datetime.date.today()
-    date_delta = datetime.timedelta(days=5)
-    start_date = end_date - date_delta
     date_stamp = f'{start_date.month}-{start_date.day} to {end_date.month}-{end_date.day}'
 
-    output_dir = Config.PARENT_DIR + '\\files\\pdf'
+    output_dir = config.PARENT_DIR + '\\files\\pdf'
     output_name = f'\\Weekly Sales Report ({date_stamp}).pdf'
     output_path = output_dir + output_name
     rep = salesman['rep_no']
@@ -29,13 +24,9 @@ def run_ninja(salesman):
     return report_pdf
 
 
-def delete_pdfs():
-    pdf_dir = Config.PARENT_DIR + '\\files\\pdf'
+def delete_pdfs(config):
+    pdf_dir = config.PARENT_DIR + '\\files\\pdf'
     for file in os.listdir(pdf_dir):
         file_path = pdf_dir + f'\\{file}'
         os.remove(file_path)
         print(f'Deleted {file_path} \n')
-
-
-if __name__ == "__main__":
-    delete_pdfs()

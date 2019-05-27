@@ -1,6 +1,6 @@
 from os.path import dirname, abspath
 import calendar
-from sigm import dev_check
+from quatro import dev_check
 
 
 class Config:
@@ -40,8 +40,8 @@ class Config:
         TASK_SCHEDULE = [
             {
                 'name': 'friday afternoon',
-                'weekday': calendar.FRIDAY,
-                'hour': 14,
-                'minute': 32
+                'weekday': calendar.MONDAY,
+                'hour': 10,
+                'minute': 47
             }
         ]
