@@ -1,10 +1,11 @@
 from os.path import dirname, abspath
 import calendar
-from quatro import dev_check
 
 
 class Config:
-    PARENT_DIR = dirname(abspath(__file__))
+    def __init__(self, main_file_path):
+        self.main_file_path = main_file_path
+        self.parent_dir = dirname(abspath(main_file_path))
 
     SALESMEN = [
         {
@@ -27,21 +28,17 @@ class Config:
         }
     ]
 
-    if not dev_check():
-        TASK_SCHEDULE = [
-            {
-                'name': 'friday afternoon',
-                'weekday': calendar.FRIDAY,
-                'hour': 17,
-                'minute': 0
-            }
-        ]
-    else:
-        TASK_SCHEDULE = [
-            {
-                'name': 'friday afternoon',
-                'weekday': calendar.MONDAY,
-                'hour': 10,
-                'minute': 47
-            }
-        ]
+    TASK_SCHEDULE = [
+        # {
+        #     'name': 'friday afternoon',
+        #     'weekday': calendar.FRIDAY,
+        #     'hour': 16,
+        #     'minute': 50
+        # }
+        {
+            'name': 'friday afternoon',
+            'weekday': calendar.FRIDAY,
+            'hour': 10,
+            'minute': 56
+        }
+    ]

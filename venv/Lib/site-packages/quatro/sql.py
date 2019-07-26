@@ -1,5 +1,6 @@
 import psycopg2.extensions
 from . import files
+from . import configuration
 
 # PostgreSQL DB connection configs
 psycopg2.extensions.register_type(psycopg2.extensions.UNICODE)
@@ -21,9 +22,9 @@ def sigm_connect(channel=None):
     if channel:
         sigm_listen = sigm_connection.cursor()
         sigm_listen.execute(f"LISTEN {channel};")
-        print(f'Listen channel {channel} open on DB {dbname} at host {host}')
+        files.log(f'Listen channel {channel} open on DB {dbname} at host {host}')
     sigm_db_cursor = sigm_connection.cursor()
-    print(f'SIGM cursor open on DB {dbname} at host {host}')
+    files.log(f'SIGM cursor open on DB {dbname} at host {host}')
 
     return sigm_connection, sigm_db_cursor
 
@@ -39,7 +40,7 @@ def log_connect():
     log_connection.set_isolation_level(psycopg2.extensions.ISOLATION_LEVEL_AUTOCOMMIT)
 
     log_db_cursor = log_connection.cursor()
-    print(f'Log cursor open on DB LOG at host {host}')
+    files.log(f'Log cursor open on DB LOG at host {host}')
 
     return log_connection, log_db_cursor
 
@@ -68,11 +69,29 @@ def scalar_data(result_set):
 
 # Query SIGM database
 def sql_query(sql_exp, cursor):
-    cursor.execute(sql_exp)
-    result_set = cursor.fetchall()
+    try:
+        cursor.execute(sql_exp)
+    except:
+        reconnect()
+    try:
+        result_set = cursor.fetchall()
+    except:
+        return
     return result_set
+
+
+def reconnect():
+    try:
+        configuration.config.sigm_connection.close()
+        configuration.config.sigm_connection, configuration.config.sigm_db_cursor = sigm_connect()
+        if configuration.config.log_connection:
+            configuration.config.log_connection.close()
+            configuration.config.log_connection, configuration.config.log_db_cursor = log_connect()
+    except:
+        pass
 
 
 if __name__ == "__main__":
     sigm_connect()
     log_connect()
+    reconnect()
