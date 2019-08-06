@@ -1,4 +1,5 @@
-from quatro import init_app_log_dir, log, start_scheduler, configuration as c
+from quatro import init_app_log_dir, log, \
+    start_scheduler, configuration as c
 from config import Config
 from tasks import scheduler_task
 

@@ -29,16 +29,10 @@ class Config:
     ]
 
     TASK_SCHEDULE = [
-        # {
-        #     'name': 'friday afternoon',
-        #     'weekday': calendar.FRIDAY,
-        #     'hour': 16,
-        #     'minute': 50
-        # }
         {
             'name': 'friday afternoon',
             'weekday': calendar.FRIDAY,
-            'hour': 10,
-            'minute': 56
+            'hour': 16,
+            'minute': 50
         }
     ]

@@ -9,5 +9,4 @@ def scheduler_task():
     for salesman in c.config.SALESMEN:
         delete_pdfs()
         report_pdf = run_ninja(start_date, end_date, salesman)
-        # send_email('Weekly Sales Report', [salesman['email']], ['mark.s@quatroair.com'], [report_pdf])
-        send_email('Weekly Sales Report', ['jan.z@quatroair.com'], ['jan.z@quatroair.com'], [report_pdf])
+        send_email('Weekly Sales Report', [salesman['email']], ['mark.s@quatroair.com'], [report_pdf])
