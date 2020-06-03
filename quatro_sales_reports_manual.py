@@ -1,10 +1,11 @@
-import config
+from quatro import configuration as c
+from config import Config
 from tasks import scheduler_task
 
 
 def main():
-    sales_report_config = config.Config()
-    scheduler_task(sales_report_config)
+    c.config = Config(__file__)
+    scheduler_task()
 
 
 if __name__ == "__main__":

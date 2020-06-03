@@ -9,21 +9,21 @@ class Config:
 
     SALESMEN = [
         {
-            'name': 'Christopher Fraser',
+            'name': 'CHRISTOPHER FRASER',
             'rep_no': 11,
-            'currency': 'Canadian Dollar',
+            'currency': 'CAD',
             'email': 'christopher.f@quatroair.com'
         },
         {
-            'name': 'Mark Castanheiro',
+            'name': 'MARK CASTANHEIRO',
             'rep_no': 200,
-            'currency': 'Canadian Dollar',
+            'currency': 'CAD',
             'email': 'mark.c@quatroair.com'
         },
         {
-            'name': 'Vince Parlavechio',
+            'name': 'VINCE PARLAVECHIO',
             'rep_no': 19,
-            'currency': 'US Dollar',
+            'currency': 'USD',
             'email': 'vin.par@verizon.net'
         }
     ]

@@ -12,12 +12,12 @@ def run_ninja(start_date, end_date, salesman):
     output_dir = c.config.parent_dir + '\\files\\pdf'
     output_name = f'\\Weekly Sales Report ({date_stamp}).pdf'
     output_path = output_dir + output_name
-    rep = salesman['rep_no']
+    rep = salesman['name']
     curr = salesman['currency']
     command = f'"{ninja}" -D QuatroAir -U SIGM -F "{report}" -O "{output_path}" ' \
-              f'-a "Representative:{rep}" ' \
-              f'-a "Date:({start_date}, {end_date})" ' \
-              f'-a "Summary Currency:{curr}"'
+              f'-a "Salesman:{rep}" ' \
+              f'-a "Date Range:({start_date}, {end_date})" ' \
+              f'-a "Currency:{curr}"'
     log(f'Sending following command to shell : {command} \n')
     check_output(command, shell=True).decode()
     report_pdf = {'file': output_path, 'name': output_name}
